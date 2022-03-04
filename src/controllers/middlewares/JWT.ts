@@ -12,4 +12,13 @@ const generateToken = (userInfo: object) => {
   return token;
 };
 
-export default { generateToken };
+const validateToken = (authorization: string) => {
+  try {
+    const token = jwt.verify(authorization, segredo);
+    console.log(token);
+  } catch (error) {
+    return { status: 401, message: { error: 'Invalid token' } };
+  }
+};
+
+export default { generateToken, validateToken };
