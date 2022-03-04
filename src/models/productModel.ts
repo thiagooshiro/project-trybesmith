@@ -9,4 +9,10 @@ const createProduct = async (name: string, amount: string) => {
   return { id: insertId, name, amount };
 };
 
-export default { createProduct };
+const getAll = async () => {
+  const sqlQuery = 'SELECT * FROM Trybesmith.Products';
+  const [products] = await connection.execute(sqlQuery);
+  return products;
+};
+
+export default { createProduct, getAll };

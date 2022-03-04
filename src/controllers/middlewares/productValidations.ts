@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import JWT from './JWT';
 
 const validateProductName = (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body;
@@ -26,4 +27,13 @@ const validateProductAmount = (req: Request, res: Response, next: NextFunction) 
   next();
 };
 
-export default { validateProductName, validateProductAmount };
+const validateToken = (req: Request, res: Response, next: NextFunction) => {
+  const { authorization } = req.headers;
+  if (!authorization) return res.status(401).json({ error: 'Token not found' });
+  const authTest = JWT.validateToken(authorization); 
+  if (authTest) return res.status(authTest.status).json(authTest.message);
+
+  next();
+};
+
+export default { validateProductName, validateProductAmount, validateToken };

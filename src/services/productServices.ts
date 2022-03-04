@@ -5,4 +5,9 @@ const createProduct = async (name: string, amount: string) => {
   return newUser;
 };
 
-export default { createProduct };
+const getAll = async () => {
+  const allProds = await productModel.getAll();
+  return allProds;
+};
+
+export default { createProduct, getAll };
