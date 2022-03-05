@@ -1,4 +1,4 @@
-import jwt, { SignOptions } from 'jsonwebtoken';
+import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken';
 
 const config: SignOptions = {
   algorithm: 'HS256',
@@ -15,7 +15,7 @@ const generateToken = (userInfo: object) => {
 const validateToken = (authorization: string) => {
   try {
     const token = jwt.verify(authorization, segredo);
-    console.log(token);
+    return token as JwtPayload;
   } catch (error) {
     return { status: 401, message: { error: 'Invalid token' } };
   }

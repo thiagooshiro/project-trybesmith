@@ -31,7 +31,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
   if (!authorization) return res.status(401).json({ error: 'Token not found' });
   const authTest = JWT.validateToken(authorization); 
-  if (authTest) return res.status(authTest.status).json(authTest.message);
+  if (authTest.status === 401) return res.status(authTest.status).json(authTest.message);
 
   next();
 };
