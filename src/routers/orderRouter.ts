@@ -10,7 +10,15 @@ orderRouter.post(
   '/',
   productValidations.validateToken,
   orderValidatios.validateOrder,
+  orderValidatios.ValidateProduct,
   orderController.createOrder,
 );
 
 export default orderRouter;
+
+orderRouter.get(
+  '/:id', 
+  productValidations.validateToken,
+  orderValidatios.orderValidation,
+  orderController.getOrderById,
+);
