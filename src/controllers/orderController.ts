@@ -25,7 +25,7 @@ const getOrderById = async (req: Request, res: Response) => {
 
 // req7
 
-const getAllOrders = async (req: Request, res: Response) => {
+const getAllOrders = async (_req: Request, res: Response) => {
   const allOrders = await orderServices.getAllOrders();
   return res.status(200).json(allOrders);
 };

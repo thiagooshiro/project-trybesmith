@@ -17,7 +17,6 @@ const createOrder = async (userId: string, products: Array<number>) => {
 const getOrderById = async (id: string) => {
   const orderById = await orderModel.getOrderById(id);
   const products = await orderModel.selectByOrder(+id);
-  console.log('productsOrder', products);
   const mapIds = products.map((valor) => {
     const [x] = Object.values(valor);
     return x;
@@ -36,7 +35,6 @@ const getAllOrders = async () => {
     return { ...order, products };
   });
   const response = await Promise.all(arrayOrders);
-  console.log('array Orders', response);
   return response;
 };
 

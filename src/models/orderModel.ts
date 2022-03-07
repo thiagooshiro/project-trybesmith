@@ -19,7 +19,6 @@ const updateProduct = async (orderId: number, productId: number) => {
 const selectByOrder = async (orderId: number) => {
   const secondQuery = 'SELECT id FROM Trybesmith.Products WHERE orderId=?';
   const [id] = await connection.execute<RowDataPacket[]>(secondQuery, [orderId]);
-  console.log('id', id);
   return id;
 };
 
