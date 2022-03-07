@@ -25,4 +25,19 @@ const getOrderById = async (id: string) => {
   return { ...orderById, products: mapIds };
 };
 
-export default { createOrder, getOrderById };
+// req7
+
+const getAllOrders = async () => {
+  const allOrders = await orderModel.getAllOrders();
+  const arrayOrders = allOrders.map(async (order) => {
+    const IdOrder = order.id;
+    const productsObj = await orderModel.selectByOrder(IdOrder);
+    const products = productsObj.map((prod) => prod.id);
+    return { ...order, products };
+  });
+  const response = await Promise.all(arrayOrders);
+  console.log('array Orders', response);
+  return response;
+};
+
+export default { createOrder, getOrderById, getAllOrders };

@@ -1,4 +1,4 @@
-import { OkPacket, ResultSetHeader } from 'mysql2';
+import { OkPacket, ResultSetHeader, RowDataPacket } from 'mysql2';
 import connection from './connection';
 
 // req 5
@@ -18,7 +18,8 @@ const updateProduct = async (orderId: number, productId: number) => {
 
 const selectByOrder = async (orderId: number) => {
   const secondQuery = 'SELECT id FROM Trybesmith.Products WHERE orderId=?';
-  const [id] = await connection.execute<OkPacket[]>(secondQuery, [orderId]);
+  const [id] = await connection.execute<RowDataPacket[]>(secondQuery, [orderId]);
+  console.log('id', id);
   return id;
 };
 
@@ -42,10 +43,20 @@ const getOrderById = async (id: string) => {
   return orderById;
 };
 
+// req7
+
+const getAllOrders = async () => {
+  const sqlQuery = 'SELECT * FROM Trybesmith.Orders';
+  const [allOrders] = await connection.execute<RowDataPacket[]>(sqlQuery);
+  return allOrders;
+};
+
 export default { 
   createOrder,
   getOrderById,
   checkProduct,
   updateProduct,
   selectByOrder,
-  checkOrder };
+  checkOrder,
+  getAllOrders,
+};

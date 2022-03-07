@@ -23,4 +23,11 @@ const getOrderById = async (req: Request, res: Response) => {
   return res.status(200).json(orderById);
 };
 
-export default { createOrder, getOrderById };
+// req7
+
+const getAllOrders = async (req: Request, res: Response) => {
+  const allOrders = await orderServices.getAllOrders();
+  return res.status(200).json(allOrders);
+};
+
+export default { createOrder, getOrderById, getAllOrders };

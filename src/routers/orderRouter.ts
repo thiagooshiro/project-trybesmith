@@ -22,3 +22,9 @@ orderRouter.get(
   orderValidatios.orderValidation,
   orderController.getOrderById,
 );
+
+orderRouter.get(
+  '/',
+  productValidations.validateToken,
+  orderController.getAllOrders,
+);
