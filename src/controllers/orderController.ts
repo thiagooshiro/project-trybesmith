@@ -27,6 +27,7 @@ const getOrderById = async (req: Request, res: Response) => {
 
 const getAllOrders = async (_req: Request, res: Response) => {
   const allOrders = await orderServices.getAllOrders();
+  console.log(allOrders);
   return res.status(200).json(allOrders);
 };
 
